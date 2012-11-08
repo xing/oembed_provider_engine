@@ -1,0 +1,82 @@
+= OembedProviderEngine
+
+Turns your rails app into an {oembed}[http://oembed.com/] provider
+
+== About
+{Oembed}[http://oembed.com/] is an open format for embedding media from third-party providers. This gem is a mountable engine that turns your rails 3 app into an oembed provider allowing oembed consumers to easily embed your media resources into their site.
+
+== Usage
+=== Installation
+Add the following to your Gemfile:
+
+  gem "oembed-provider-engine"
+
+=== Provider Settings
+Add a config/initializers/oembed_provider.rb file to configure your provider settings:
+
+  OembedProviderEngine::OembedProvider.provider_name = "Example Provider"
+  OembedProviderEngine::OembedProvider.provider_url  = "http://example.com"
+
+If a controller doesn't map to model name as per tablize convention, map it like this:
+
+  OembedProviderEngine::OembedProvider.controller_model_maps = { 'example' => 'FooBar' }
+
+=== Providable Model
+To declare your model providable, include the following:
+
+  include OembedProvider::OembedProvidable
+  # the first argument is the oembed type, that is one of :rich, :link, :photo, or :video
+  oembed_providable_as :rich
+
+Your model has to provide methods to give what oembed_provider expects for your oembed type. Those methods need to make sure that request parameters maxheight and maxwidth are obeyed, see {oembed specs}[http://oembed.com/] for details. 
+
+If the methods have names different from the respective oembed attributes, you need to match them here:
+
+  # data for the oembed attribute 'title' is provided by a method named 'label'
+  oembed_providable_as :link, title: :label
+
+You can also override the provider settings from the initializer:
+
+  oembed_providable_as :link, provider_name: 'Example'
+
+=== Discovery
+If you want to allow for oembed discovery, you can use the helper function from this engine to add links to the HTML head:
+
+  <%= oembed_provider_links %>
+
+=== Routing
+The engine adds a route +/oembed+ to your app, which is your oembed api endpoint. By default, it returns json, but it may as well return xml or json-p. Following the oembed specs, a request parameter format can be used to specify the requested format (xml or json). If you add request parameters variable or callback, json-p is returned instead of json. The engine also provides the additional endpoints +/oembed.xml+ and +/oembed.json+ which return the respective format.
+
+== Security
+The current implementation directly accesses your application's model to fetch the data for the response. This may bypass your applicaton's authorization and expose non-public data via oembed if your model does not take this into account! 
+
+== TODO
+* proper handling of unauthorized
+* migrate from shoulda to rspec
+* caching
+* allow the providable model to omit methods corresponding to optional oembed fields
+
+== Contribute
+Feel free to fork the project and send us pull requests.
+
+
+== Credits
+This gem is heavily based upon the rails 2 gem {oembed-provider}[https://github.com/kete/oembed_provider/] originally developed by {Walter McGinnis}[https://github.com/walter] for {kete}[https://github.com/kete].
+
+== Authors
+
+{Kerstin Puschke}[http://github.com/titanoboa],
+{Hinnerk Altenburg}[http://github.com/hinnerk-a],
+{George Avramidis}[http://github.com/tdgs] and
+{Ömür Özkir}[http://github.com/oem]
+
+You can find out more about our work on our {dev blog}[http://devblog.xing.com].
+
+== Contributors
+
+Thanks to all who have made contributions {to this gem}[https://github.com/xing/oembed-provider-engine/contributors] as well as {its rails 2 predecessor}[https://github.com/kete/oembed_provider/contributors].
+
+Copyright (c) 2012 {XING AG}[http://www.xing.com/]
+
+Released under the MIT license. For full details see MIT-LICENSE included in this
+distribution.
