@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = OembedProviderEngine::VERSION
   s.authors     = ["Kerstin Puschke", "Hinnerk Altenburg", "Giorgos Avramidis", "Oemuer Oezkir"]
   s.email       = ["dev@kpuschke.eu", "mail@hinnerk-altenburg.de", "avramidg@gmail.com", "oemuer.oezkir@gmail.com"]
-  s.homepage    = "https://github.com/xing/oembed-provider-engine"
+  s.homepage    = "https://github.com/xing/oembed_provider_engine"
   s.summary     = "Oembed Provider Rails 3 Engine"
   s.description = "Oembed Provider Rails 3 Engine"
 
