@@ -134,7 +134,7 @@ module OembedProviderEngine
               end
 
               self.class.optional_attributes_specs.each do |k,v|
-                send(k.to_s + '=', providable.send(v))
+                send(k.to_s + '=', providable.send(v)) if providable.respond_to?(v)
               end
 
               self.provider_name = self.class.providable_provider_name
