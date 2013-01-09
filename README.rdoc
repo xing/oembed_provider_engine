@@ -54,7 +54,6 @@ The current implementation directly accesses your application's model to fetch t
 * proper handling of unauthorized
 * migrate from shoulda to rspec
 * caching
-* allow the providable model to omit methods corresponding to optional oembed fields
 
 == Contribute
 Feel free to fork the project and send us pull requests.
