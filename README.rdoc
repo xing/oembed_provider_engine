@@ -54,6 +54,7 @@ The current implementation directly accesses your application's model to fetch t
 * proper handling of unauthorized
 * migrate from shoulda to rspec
 * caching
+* allow for custom, additional fields in the response
 
 == Contribute
 Feel free to fork the project and send us pull requests.
