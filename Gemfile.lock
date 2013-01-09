@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    oembed_provider_engine (0.0.1)
+    oembed_provider_engine (0.1.0)
       addressable
       nokogiri
       rails (~> 3.2.8)

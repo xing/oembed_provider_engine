@@ -50,7 +50,7 @@ module OembedProviderEngine
                      json
                    end
                  end
-      render({:content_type => :js, :text => response}.merge(options))
+      render({:content_type => "application/json", :text => response}.merge(options))
     end
   end
 end
