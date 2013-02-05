@@ -9,7 +9,7 @@ Turns your rails app into an {oembed}[http://oembed.com/] provider
 === Installation
 Add the following to your Gemfile:
 
-  gem "oembed-provider-engine"
+  gem "oembed_provider_engine"
 
 === Provider Settings
 Add a config/initializers/oembed_provider.rb file to configure your provider settings:
